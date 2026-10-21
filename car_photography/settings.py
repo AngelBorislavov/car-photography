@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'pages',
     'photos',
     'ranking',
-    'comments'
+    'comments',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
