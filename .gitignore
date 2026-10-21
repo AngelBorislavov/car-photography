@@ -1,0 +1,15 @@
+# Виртуални среди
+venv/
+.venv/
+env/
+
+# Python компилирани файлове и кеш
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Локални настройки и IDE файлове
+.vscode/
+.idea/
+.env
+*.log
