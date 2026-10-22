@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from pages import views
+from pages import views as page_views
+from photographers import views as photographer_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home_view),
+    path('', page_views.home_view, name="home"),
+    path('photographers/', photographer_views.photographers_list,name = "photographers"),
 ]

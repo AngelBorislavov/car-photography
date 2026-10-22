@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'photos',
     'ranking',
     'comments',
+    'photographers',
     'bootstrap5',
 ]
 

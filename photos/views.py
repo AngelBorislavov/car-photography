@@ -8,6 +8,3 @@ def photo_upload(request):
         return redirect("upload")
 
     return render(request, "pages/upload.html", {"form": form})
-
-def photo_list(request):
-    
