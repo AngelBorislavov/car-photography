@@ -5,12 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Photograpy</title>
+    <link rel="stylesheet" href="{% static 'pages/style.css' %}">
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 </head>
-<body style="margin: 0; display: grid; place-items: center; padding-bottom:1em;">
-    {% block contet %} {% endblock %}
+<body>
+    <ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'photographers' %}">Photographers</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Galery</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="#">Rank List</a>
+    </li>
+    </ul>
+    {% block content %}{% endblock %}
 
 </body>
 </html>

@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photographers</title>
-</head>
-<body>
+{% extends "pages/base.html" %}
+    {% block content %}
+    {% load static %}
     <h1>Photographers</h1>
     <ul>
     {% for p in photographers %}
@@ -21,7 +16,6 @@
             <p>{{ form.name}}</p>
             <p>{{ form.email }}</p>
             <p>{{ form.biography }}</p>
-            <button type="submit">Add photographer</button>
+            <button class="btn btn-primary" type="submit">Add photographer</button>
         </form>
-</body>
-</html>
+    {% endblock %}    

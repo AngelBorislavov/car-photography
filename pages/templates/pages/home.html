@@ -1,39 +1,12 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Photograpy</title>
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-</head>
-<body style="margin: 0; display: grid; place-items: center; padding-bottom:1em;">
-   <ul class="nav">
-    <li class="nav-item">
-        <a class="nav-link active" href="{% url 'home' %}">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'photographers' %}">Photographers</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Galery</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link " href="#">Rank List</a>
-    </li>
-    </ul>
-    
+{% extends "pages/base.html" %}
+    {% block content %}
+    {% load static %}
     <br>
     <img src="{% static 'pages/banner2.jpg' %}" alt="banner" width="70%" height="400px">
     
     <br>
     <h2 style="padding-top:1em;">Weakly Favorite</h2>
     <p>There is no data for the week yet.</p>
-
-    {% block content %}
+    
     {% endblock %}
-</body>
-</html>
 
