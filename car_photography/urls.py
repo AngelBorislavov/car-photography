@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from pages import views as page_views
 from photographers import views as photographer_views
+from photos import views as photos_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', page_views.home_view, name="home"),
     path('photographers/', photographer_views.photographers_list,name = "photographers"),
+    path('gallery/', photos_views.gallery_views, name='gallery'),
+    path('gallery/gallery_upload', photos_views.photo_upload, name='gallery_upload')
 ]

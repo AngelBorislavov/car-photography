@@ -1,0 +1,17 @@
+{% extends "pages/base.html" %}
+    {% block content %}
+    {% load static %}
+    
+    <h2>Upload your photo</h2>
+     
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload photo</button>
+    </form>
+
+   
+
+    
+
+    {% endblock %} 

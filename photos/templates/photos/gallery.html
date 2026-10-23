@@ -1,0 +1,16 @@
+{% extends "pages/base.html" %}
+    {% block content %}
+    {% load static %}
+    
+    <h2>Gallery</h2>
+    <a id="upload_button" href="{% url 'gallery_upload' %}">Upload new photo</a>
+
+    {% for p in photos %}
+    <img src="{{ p.photo.url }}" alt="{{ p.brand }} {{ p.model }}">
+        <p>{{ p.brand }} {{ p.model }}</p>
+        <p>Photographer: {{ p.photographer.name }}</p>
+    {% empty %}
+        <p>The Gallery Is Empty ,Please Upload a Photo</p>
+    {% endfor %}
+    
+    {% endblock %} 
