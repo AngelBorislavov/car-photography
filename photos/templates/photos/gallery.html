@@ -6,9 +6,19 @@
     <a id="upload_button" href="{% url 'gallery_upload' %}">Upload new photo</a>
 
     {% for p in photos %}
-    <img src="{{ p.photo.url }}" alt="{{ p.brand }} {{ p.model }}">
+    <img class="car_photo" src="{{ p.photo.url }}" alt="{{ p.brand }} {{ p.model }}">
         <p>{{ p.brand }} {{ p.model }}</p>
         <p>Photographer: {{ p.photographer.name }}</p>
+        <p>Avarage rate: {% if p.average_rating %}{{ p.average_rating|floatformat:1 }}{% else %}not rated {% endif %} ({{ p.rating_count }} rates)</p>
+        {% if p.current_rating %}
+        <p>Your rating {{ p.current_rating }} from 5</p>
+        {% endif %}
+        <form class="rating-form" method="post" action="{% url 'rate_photo' p.pk %}">
+            {% csrf_token %}
+            {{ rating_form.score.label_tag }}
+            {{ rating_form.score }}
+            <button type="submit">Rate</button>
+        </form>
     {% empty %}
         <p>The Gallery Is Empty ,Please Upload a Photo</p>
     {% endfor %}

@@ -6,24 +6,20 @@ body{
 }
 
 #upload_button {
-  /* Layout & Sizing */
   display: inline-block;
   padding: 10px 20px;
   
-  /* Typography */
   font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
-  text-decoration: none; /* Removes the default underline */
+  text-decoration: none;
   text-align: center;
   
-  /* Colors & Appearance */
   background-color: #0066cc;
   color: #ffffff;
   border-radius: 6px;
   border: 1px solid transparent;
   
-  /* Smooth transitions */
   transition: background-color 0.2s ease, transform 0.1s ease;
   cursor: pointer;
 }
@@ -38,8 +34,23 @@ body{
   transform: scale(0.98);
 }
 
-/* Focus state for keyboard accessibility */
 #upload_button:focus-visible {
   outline: 2px solid #0066cc;
   outline-offset: 2px;
+}
+
+.car_photo{
+  width: 600px;
+  height:400px;
+  padding-top: 1em;
+}
+
+.rating-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating-form label {
+  margin: 0;
 }

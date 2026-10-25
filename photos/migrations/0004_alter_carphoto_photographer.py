@@ -8,10 +8,11 @@ def assign_anonymous_photos(apps, schema_editor):
     CarPhoto = apps.get_model('photos', 'CarPhoto')
     Photographer = apps.get_model('photographers', 'Photographers')
     database = schema_editor.connection.alias
+    anonymous_photos = CarPhoto.objects.using(database).filter(photographer__isnull=True)
+    if not anonymous_photos.exists():
+        return
     photographer = Photographer.objects.using(database).get(name='Atanas')
-    CarPhoto.objects.using(database).filter(photographer__isnull=True).update(
-        photographer_id=photographer.pk
-    )
+    anonymous_photos.update(photographer_id=photographer.pk)
 
 
 class Migration(migrations.Migration):
