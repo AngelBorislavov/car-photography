@@ -27,10 +27,20 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', page_views.home_view, name="home"),
     path('photographers/', photographer_views.photographers_list,name = "photographers"),
+    path('photographers/<int:photographer_id>/photos/', photos_views.photographer_gallery, name='photographer_photos'),
+    path('photographers/<int:photographer_id>/edit/', photographer_views.edit_photographer, name='edit_photographer'),
+    path('photographers/<int:photographer_id>/delete/', photographer_views.photographer_delete, name='delete_photographer'),
+    path('photographers/photographer_form/', photographer_views.photographer_form, name='photographer_form'),
     path('gallery/', photos_views.gallery_views, name='gallery'),
+    path('gallery/<int:photo_id>/', photos_views.photo_detail, name='photo_detail'),
+    path('gallery/<int:photo_id>/edit/', photos_views.edit_photo, name='edit_photo'),
     path('gallery/gallery_upload', photos_views.photo_upload, name='gallery_upload'),
+    path('gallery/<int:photo_id>/delete/', photos_views.delete_photo, name='delete_photo'),
     path('gallery/<int:photo_id>/rate/', ranking_views.rate_photo, name='rate_photo'),
+    path('rank_list',ranking_views.rank_list,name='rank_list')
 ]
+
+handler404 = page_views.custom_404
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

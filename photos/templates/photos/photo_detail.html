@@ -1,0 +1,17 @@
+{% extends "pages/base.html" %}
+{% block content %}
+<main>
+	<h2>{{ photo.title }}</h2>
+	<img class="car_photo" src="{{ photo.photo.url }}" alt="{{ photo.title }}">
+	<p>Photographer: <a href="{% url 'photographer_photos' photo.photographer_id %}">{{ photo.photographer.name }}</a></p>
+	<h3>Cars in this photo</h3>
+	<ul>
+		{% for car in photo.cars.all %}
+		<li>{{ car.brand }} {{ car.model }} ({{ car.get_body_type_display }})</li>
+		{% empty %}
+		<li>No car details have been added.</li>
+		{% endfor %}
+	</ul>
+	<a href="{% url 'gallery' %}">Back to gallery</a>
+</main>
+{% endblock %}

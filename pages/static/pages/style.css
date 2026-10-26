@@ -5,10 +5,9 @@ body{
     padding-bottom:1em;
 }
 
-#upload_button {
+#upload_button ,#add_photographer_button {
   display: inline-block;
   padding: 10px 20px;
-  
   font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
@@ -25,16 +24,16 @@ body{
 }
 
 /* Hover state */
-#upload_button:hover {
+#upload_button:hover ,#add_photographer_button:hover {
   background-color: #0052a3;
 }
 
 /* Active/Click state */
-#upload_button:active {
+#upload_button:active ,#add_photographer_button:active {
   transform: scale(0.98);
 }
 
-#upload_button:focus-visible {
+#upload_button:focus-visible ,#add_photographer_button:focus-visible {
   outline: 2px solid #0066cc;
   outline-offset: 2px;
 }
@@ -54,3 +53,18 @@ body{
 .rating-form label {
   margin: 0;
 }
+
+.photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.photo-actions form {
+  margin: 0;
+}
+
+#photographers_list{
+  padding: 1em;
+}
+

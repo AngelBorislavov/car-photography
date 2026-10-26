@@ -2,11 +2,17 @@
     {% block content %}
     {% load static %}
     <br>
-    <img src="{% static 'pages/banner2.jpg' %}" alt="banner" width="70%" height="400px">
+    <img src="{% static 'pages/banner2.jpg' %}" alt="banner" width="70%" height="350px">
     
     <br>
-    <h2 style="padding-top:1em;">Weakly Favorite</h2>
-    <p>There is no data for the week yet.</p>
+    <h2 style="padding-top:1em;">Weekly Favorite</h2>
+
+    {% if weekly_favorite %}
+        <img class="car_photo" src="{{ weekly_favorite.photo.url }}" alt="{{ weekly_favorite.title }}">
+        
+    {% else %}
+        <p>There is no rated photo from the last week yet.</p>
+    {% endif %}
     
     {% endblock %}
 

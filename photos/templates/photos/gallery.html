@@ -2,25 +2,48 @@
     {% block content %}
     {% load static %}
     
+    {% if photographer %}
+    <h2>{{ photographer.name }}'s photos</h2>
+    {% else %}
     <h2>Gallery</h2>
+    {% endif %}
     <a id="upload_button" href="{% url 'gallery_upload' %}">Upload new photo</a>
 
+    <form method="get" action="{% if photographer %}{% url 'photographer_photos' photographer.pk %}{% else %}{% url 'gallery' %}{% endif %}">
+        <label for="car-search">Search by car brand or model</label>
+        <input id="car-search" type="search" name="q" value="{{ search_query }}" placeholder="e.g. BMW or M3">
+        <button type="submit">Search</button>
+        {% if search_query %}<a href="{% if photographer %}{% url 'photographer_photos' photographer.pk %}{% else %}{% url 'gallery' %}{% endif %}">Clear</a>{% endif %}
+    </form>
+
     {% for p in photos %}
-    <img class="car_photo" src="{{ p.photo.url }}" alt="{{ p.brand }} {{ p.model }}">
-        <p>{{ p.brand }} {{ p.model }}</p>
+    <img class="car_photo" src="{{ p.photo.url }}" alt="{{ p.title }}">
+        <h3><a href="{% url 'photo_detail' p.pk %}">{{ p.title }}</a></h3>
+        <p>Cars:
+            {% for car in p.cars.all %}
+            {{ car.brand }} {{ car.model }} ({{ car.get_body_type_display }}){% if not forloop.last %}, {% endif %}
+            {% empty %}No car details{% endfor %}
+        </p>
         <p>Photographer: {{ p.photographer.name }}</p>
-        <p>Avarage rate: {% if p.average_rating %}{{ p.average_rating|floatformat:1 }}{% else %}not rated {% endif %} ({{ p.rating_count }} rates)</p>
         {% if p.current_rating %}
         <p>Your rating {{ p.current_rating }} from 5</p>
         {% endif %}
-        <form class="rating-form" method="post" action="{% url 'rate_photo' p.pk %}">
-            {% csrf_token %}
-            {{ rating_form.score.label_tag }}
-            {{ rating_form.score }}
-            <button type="submit">Rate</button>
-        </form>
+        <div class="photo-actions">
+            <form class="rating-form" method="post" action="{% url 'rate_photo' p.pk %}">
+                {% csrf_token %}
+                {{ rating_form.score.label_tag }}
+                {{ rating_form.score }}
+                <button class="btn btn-primary" type="submit">Rate</button>
+            </form>
+            <a class="btn btn-secondary" href="{% url 'edit_photo' p.pk %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'delete_photo' p.pk %}">DELETE</a>
+        </div>
     {% empty %}
+        {% if photographer %}
+        <p>This photographer has no photos yet.</p>
+        {% else %}
         <p>The Gallery Is Empty ,Please Upload a Photo</p>
+        {% endif %}
     {% endfor %}
     
     {% endblock %} 

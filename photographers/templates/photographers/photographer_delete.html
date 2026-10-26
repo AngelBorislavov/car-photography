@@ -1,0 +1,10 @@
+{% extends "pages/base.html" %}
+{% block content %}
+<h1>Delete {{ photographer.name }}?</h1>
+<p>Deleting this photo will also delete {{ photo_count }} photos. This action cannot be undone.</p>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Delete the photographer and their photos</button>
+    <a class="btn btn-secondary" href="{% url 'photographers' %}">Отказ</a>
+</form>
+{% endblock %}

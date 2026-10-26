@@ -1,0 +1,12 @@
+{% extends "pages/base.html" %}
+{% block content %}
+<h1>Edit Photographer</h1>
+<form method="post">
+    {% csrf_token %}
+    <p>{{ form.name.label_tag }} {{ form.name }}</p>
+    <p>{{ form.email.label_tag }} {{ form.email }}</p>
+    <p> {{ form.biography }}</p>
+    <button class="btn btn-primary" type="submit">Save changes</button>
+    <a class="btn btn-secondary" href="{% url 'photographers' %}">Cancel</a>
+</form>
+{% endblock %}

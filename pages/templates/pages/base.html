@@ -22,9 +22,24 @@
         <a class="nav-link" href="{% url 'gallery' %}">Galery</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link " href="#">Rank List</a>
+        <a class="nav-link " href="{% url 'rank_list' %}">Rank List</a>
     </li>
     </ul>
+    {% if messages %}
+    <div class="messages" role="status">
+        {% for message in messages %}
+        <p class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <footer class="bg-dark py-2 mt-5 fixed-bottom">
+        <div class="container text-light text-center">
+            <p class="fs-6 mb-1">Car Photography</p>
+            <small class="text-white-50">&copy; Copyright by SoftUni student: Angel Borislavov.</small>
+        </div>
+    </footer>
+
     {% block content %}{% endblock %}
 
 </body>

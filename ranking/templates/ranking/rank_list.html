@@ -1,0 +1,17 @@
+{% extends "pages/base.html" %}
+{% block content %}
+{% load static %}
+<h2>Top 10 Photos of The Week</h2>
+
+<ol>
+    {% for photo in photos_with_ratings %}
+    <li>
+        <img class="car_photo" src="{{ photo.photo.url }}" alt="{{ photo.title }}">
+        <p>Photographer: {{ photo.photographer.name }}</p>
+        <p>Average rating: {% if photo.average_rating %}{{ photo.average_rating|floatformat:1 }}{% else %}Not rated{% endif %}</p>
+    </li>
+    {% empty %}
+    <li>No photos uploaded in the last week.</li>
+    {% endfor %}
+</ol>
+{% endblock %}

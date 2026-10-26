@@ -2,20 +2,19 @@
     {% block content %}
     {% load static %}
     <h1>Photographers</h1>
+     <a id="add_photographer_button" href="{% url 'photographer_form' %}">Add New Photographer</a>
     <ul>
     {% for p in photographers %}
-            <li>{{p.name}}</li>        
+            <li id="photographers_list">
+                {{ p.name }}
+                <p>Biography: {{ p.biography }}</p>
+                <a class="btn btn-primary btn-sm" href="{% url 'photographer_photos' p.pk %}">All photos</a>
+                <a class="btn btn-secondary btn-sm" href="{% url 'edit_photographer' p.pk %}">Edit</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'delete_photographer' p.pk %}">Delete</a>
+            </li>
     {% empty %}
         <li>No photographers added yet.</li>
     {% endfor %}
     </ul>
-    <hr>
-    <h2>Add New Photographer</h2>
-        <form method="post">
-            {% csrf_token %}
-            <p>{{ form.name}}</p>
-            <p>{{ form.email }}</p>
-            <p>{{ form.biography }}</p>
-            <button class="btn btn-primary" type="submit">Add photographer</button>
-        </form>
+    
     {% endblock %}    

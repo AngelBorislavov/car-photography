@@ -2,16 +2,33 @@
     {% block content %}
     {% load static %}
     
-    <h2>Upload your photo</h2>
-     
+    <h2>{% if is_edit %}Edit photo{% else %}Upload your photo{% endif %}</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Upload photo</button>
+        {{ form.non_field_errors }}
+        <fieldset>
+            <legend>Photographer</legend>
+            <p>{{ form.photographer.label_tag }} {{ form.photographer }} {{ form.photographer.errors }}</p>
+            
+        </fieldset>
+        <fieldset>
+            <legend>Photo details</legend>
+            <p>{{ form.title.label_tag }} {{ form.title }} {{ form.title.errors }}</p>
+            <p>{{ form.photo.label_tag }} {{ form.photo }} {{ form.photo.errors }}</p>
+        </fieldset>
+        <fieldset>
+            <legend>Cars in the photo</legend>
+            <p>{{ form.cars.help_text }}</p>
+            {{ form.cars.errors }}
+            {{ form.cars }}
+        </fieldset>
+        <fieldset>
+            <legend>Add a new car</legend>
+            <p>Adding a car here also connects it to this photo.</p>
+            <p>{{ form.new_car_brand.label_tag }} {{ form.new_car_brand }} {{ form.new_car_brand.errors }}</p>
+            <p>{{ form.new_car_model.label_tag }} {{ form.new_car_model }} {{ form.new_car_model.errors }}</p>
+            <p>{{ form.new_car_body_type.label_tag }} {{ form.new_car_body_type }} {{ form.new_car_body_type.errors }}</p>
+        </fieldset>
+        <button type="submit">{% if is_edit %}Save changes{% else %}Upload photo{% endif %}</button>
     </form>
-
-   
-
-    
-
     {% endblock %} 
