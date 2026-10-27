@@ -46,10 +46,13 @@ class PhotoDeletionTests(TestCase):
 		self.assertTrue(CarPhoto.objects.filter(pk=other_photo.pk).exists())
 
 	def test_post_deletes_photo_and_redirects_to_gallery(self):
-		response = self.client.post(reverse("delete_photo", args=[self.photo.pk]))
+		response = self.client.post(
+			reverse("delete_photo", args=[self.photo.pk]), follow=True
+		)
 
 		self.assertRedirects(response, reverse("gallery"))
 		self.assertFalse(CarPhoto.objects.filter(pk=self.photo.pk).exists())
+		self.assertContains(response, "The photo has been deleted successfully.")
 
 	def test_get_shows_confirmation_without_deleting_photo(self):
 		response = self.client.get(reverse("delete_photo", args=[self.photo.pk]))
@@ -57,6 +60,7 @@ class PhotoDeletionTests(TestCase):
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response, "photos/gallery_delete.html")
 		self.assertContains(response, "Delete Test photo?")
+		self.assertNotContains(response, "The photo has been deleted successfully.")
 		self.assertTrue(CarPhoto.objects.filter(pk=self.photo.pk).exists())
 
 	def test_upload_form_can_create_and_connect_a_car(self):
@@ -140,3 +144,6 @@ class PhotoDeletionTests(TestCase):
 		self.assertContains(response, "Edit photo")
 		self.assertContains(response, "Test photo")
 		self.assertContains(response, "Test Car")
+		self.assertContains(response, 'name="created_at"')
+		self.assertContains(response, "disabled")
+		self.assertTrue(response.context["form"].fields["created_at"].disabled)

@@ -111,8 +111,8 @@ def delete_photo(request, photo_id):
         photo.delete()
         if photo_file:
             photo_file.delete(save=False)
+        messages.success(request, "The photo has been deleted successfully.")
         return redirect("gallery")
 
-    messages.success(request, "The photo has been deleted successfully.")
     return render(request, "photos/gallery_delete.html", {"photo": photo})
 

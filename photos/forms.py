@@ -5,6 +5,11 @@ from photographers.models import Photographers
 
 
 class CarPhotoForm(forms.ModelForm):
+	created_at = forms.DateTimeField(
+		required=False,
+		disabled=True,
+		label="Uploaded at",
+	)
 	photographer = forms.ModelChoiceField(
 		queryset=Photographers.objects.none(),
 		required=True,
@@ -38,6 +43,8 @@ class CarPhotoForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		self.fields["photographer"].queryset = Photographers.objects.all()
 		self.fields["cars"].queryset = Car.objects.all()
+		if self.instance.pk:
+			self.initial["created_at"] = self.instance.created_at
 
 	def clean(self):
 		cleaned_data = super().clean()

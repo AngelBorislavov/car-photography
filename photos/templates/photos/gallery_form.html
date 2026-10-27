@@ -15,6 +15,7 @@
             <legend>Photo details</legend>
             <p>{{ form.title.label_tag }} {{ form.title }} {{ form.title.errors }}</p>
             <p>{{ form.photo.label_tag }} {{ form.photo }} {{ form.photo.errors }}</p>
+            {% if is_edit %}<p>{{ form.created_at.label_tag }} {{ form.created_at }}</p>{% endif %}
         </fieldset>
         <fieldset>
             <legend>Cars in the photo</legend>
