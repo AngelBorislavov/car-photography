@@ -1,7 +1,7 @@
 asgiref==3.12.1
 beautifulsoup4==4.15.0
 Django==5.2.9
-django-bootstrap-v5==1.0.11
+django-bootstrap5==24.3
 pillow==13.0.0
 soupsieve==3.0.3
 sqlparse==0.6.0
